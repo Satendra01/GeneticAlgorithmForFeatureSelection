@@ -30,7 +30,7 @@ def getFitness(individual, X, y):
         X_subset = pd.get_dummies(X_parsed)
 
         # apply classification algorithm
-        clf = LogisticRegression()
+        clf = LogisticRegression(2000)
 
         return (avg(cross_val_score(clf, X_subset, y, cv=5)),)
     else:
@@ -81,8 +81,8 @@ def bestIndividual(hof, X, y):
     """
     maxAccurcy = 0.0
     for individual in hof:
-        if(individual.fitness.values > maxAccurcy):
-            maxAccurcy = individual.fitness.values
+        if(individual.fitness.values[0] > maxAccurcy):
+            maxAccurcy = individual.fitness.values[0]
             _individual = individual
 
     _individualHeader = [list(X)[i] for i in range(
